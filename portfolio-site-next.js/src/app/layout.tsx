@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import React from "react";
+import ParticlesBackground from "../components/ParticlesBackground"; // Ensure correct path
+
+const poppins = Poppins({
+  weight: ["400", "600", "700"], // Add the weights you need
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +31,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={poppins.className}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ParticlesBackground />
         {children}
       </body>
     </html>
