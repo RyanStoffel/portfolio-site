@@ -51,27 +51,28 @@ export default function Home() {
     visible: {
       y: 0,
       opacity: 1,
+      transition: { duration: 0.5 },
     },
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <NavBar />
       <ParticlesBackground />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
+      <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-20 pt-32 md:py-0">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="w-full md:w-1/2 md:pr-10 mb-10 md:mb-0"
+          className="w-full lg:w-1/2 lg:pr-10 mb-12 lg:mb-0"
         >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="max-w-xl"
+            className="max-w-xl mx-auto lg:mx-0"
           >
             <motion.p
               variants={itemVariants}
@@ -82,21 +83,21 @@ export default function Home() {
 
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
             >
               Ryan Stoffel
             </motion.h1>
 
             <motion.h2
               variants={itemVariants}
-              className="text-2xl md:text-3xl text-white/80 mb-6"
+              className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-6"
             >
               Computer Science Student & Developer
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="text-white/70 text-lg mb-8 leading-relaxed"
+              className="text-white/70 text-base md:text-lg mb-8 leading-relaxed"
             >
               I'm a passionate student at California Baptist University
               specializing in game development and web technologies. My goal is
@@ -109,7 +110,7 @@ export default function Home() {
             >
               <Link href="/resume.pdf" legacyBehavior>
                 <a
-                  className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg flex items-center transition-all hover:-translate-y-1"
+                  className="btn btn-primary flex items-center"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -120,7 +121,7 @@ export default function Home() {
 
               <Link
                 href="/contact"
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white px-6 py-3 rounded-lg flex items-center transition-all hover:-translate-y-1"
+                className="btn btn-secondary flex items-center"
               >
                 <Mail className="mr-2" size={20} />
                 Contact Me
@@ -167,51 +168,78 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full md:w-1/2 flex justify-center"
+          className="w-full lg:w-1/2 flex justify-center items-center"
         >
-          <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30">
+          <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/30">
             <Image
               src="/profilepic.png"
               alt="Ryan Stoffel"
               fill
               className="object-cover"
               priority
-              sizes="(max-width: 768px) 288px, 384px"
+              sizes="(max-width: 640px) 256px, (max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
             />
 
             {/* Decorative elements */}
-            <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary" />
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 rounded-full bg-primary/70" />
-            <div className="absolute top-1/2 -right-3 w-4 h-4 rounded-full bg-primary/40" />
+            <motion.div
+              className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute -bottom-2 -left-2 w-6 h-6 rounded-full bg-primary/70"
+              animate={{ y: [0, 8, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 2.5,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+            />
+            <motion.div
+              className="absolute top-1/2 -right-3 w-4 h-4 rounded-full bg-primary/40"
+              animate={{ x: [0, 5, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 2,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
           </div>
         </motion.div>
       </section>
 
       {/* Featured Projects Section */}
-      <section className="py-20 px-6 md:px-12 lg:px-20">
+      <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold">Featured Projects</h2>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold">
+              Featured Projects
+            </h2>
             <Link
               href="/projects"
-              className="text-primary flex items-center hover:underline"
+              className="text-primary group flex items-center hover:underline"
             >
               View All Projects
-              <ArrowRight size={16} className="ml-1" />
+              <ArrowRight
+                size={16}
+                className="ml-1 group-hover:translate-x-1 transition-transform"
+              />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="card overflow-hidden group"
+                className="card overflow-hidden group h-full"
               >
                 {/* Project Image */}
-                <div className="relative h-56 w-full overflow-hidden">
+                <div className="relative h-48 sm:h-56 w-full overflow-hidden">
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
@@ -221,8 +249,10 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                      {project.title}
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 3).map((tech, i) => (
                         <span
@@ -236,14 +266,19 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="p-6 flex flex-col">
-                  <p className="text-white/70 mb-4">{project.description}</p>
+                <div className="p-4 sm:p-6 flex flex-col h-full">
+                  <p className="text-white/70 mb-4 flex-grow">
+                    {project.description}
+                  </p>
                   <Link
                     href={`/projects/${project.id}`}
-                    className="self-start bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md transition-all hover:-translate-y-1 text-sm flex items-center"
+                    className="self-start btn btn-primary text-sm flex items-center"
                   >
                     View Project Details
-                    <ArrowRight size={16} className="ml-1" />
+                    <ArrowRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1"
+                    />
                   </Link>
                 </div>
               </motion.div>
@@ -253,25 +288,25 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 relative">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 relative">
         <div className="absolute inset-0 bg-primary/10" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto text-center relative z-10"
+          className="max-w-4xl mx-auto text-center relative z-10 px-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
             Let's Work Together
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             I'm currently looking for internship opportunities and exciting
             projects to collaborate on. If you're interested in working
             together, feel free to get in touch!
           </p>
           <Link
             href="/contact"
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg inline-block transition-all hover:-translate-y-1"
+            className="btn btn-primary px-8 py-3 inline-block"
           >
             Get In Touch
           </Link>

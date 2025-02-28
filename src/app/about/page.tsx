@@ -68,10 +68,10 @@ export default function AboutMe() {
             interactive experiences.
           </p>
           <p>
-            When I'm not coding, you'll find me playing video games, exploring
-            new technologies, or experimenting with game design concepts. I
-            believe in continuous learning and am always looking for new
-            challenges that push my abilities further.
+            When I'm not coding, you'll find me playing video games, hanging out
+            with friends and family, or spending time in nature. I believe in
+            continuous learning and am always looking for new challenges that
+            push my abilities further.
           </p>
         </>
       ),
@@ -145,7 +145,7 @@ export default function AboutMe() {
               year: "2019",
               title: "First Line of Code",
               description:
-                "Wrote my first program in Python, beginning my journey into the world of programming.",
+                "I took Intro to Video Game Design in high school, and wrote my first couple games in Unity!",
             },
             {
               year: "2021",
@@ -154,16 +154,16 @@ export default function AboutMe() {
                 "Took my first formal programming class, learning the fundamentals of Java and computer science.",
             },
             {
-              year: "2022",
-              title: "First Game Project",
-              description:
-                "Developed my first game using Unity, discovering my passion for game development.",
-            },
-            {
               year: "2023",
               title: "Enrolled at California Baptist University",
               description:
                 "Started my Computer Science degree, diving deeper into programming concepts and software development.",
+            },
+            {
+              year: "2023",
+              title: "First Game Project",
+              description:
+                "Developed my first game using Unity, discovering my passion for game development.",
             },
             {
               year: "2024",

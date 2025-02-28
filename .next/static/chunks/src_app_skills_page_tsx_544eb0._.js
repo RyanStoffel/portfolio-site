@@ -6,7 +6,7 @@
   "path": "static/chunks/src_app_skills_page_tsx_544eb0._.js",
   "chunks": [
     "static/chunks/src_40131d._.js",
-    "static/chunks/node_modules_260b40._.js"
+    "static/chunks/node_modules_e50f89._.js"
   ],
   "source": "dynamic"
 });

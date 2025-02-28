@@ -58,15 +58,15 @@ export default function ContactPage() {
       <NavBar />
       <ParticlesBackground />
 
-      <div className="container mx-auto px-4 py-24">
+      <div className="container mx-auto px-4 py-24 pt-32">
         <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-6">Contact Me</h1>
-          <p className="text-lg max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">Contact Me</h1>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto opacity-80">
             I'm always open to new opportunities and collaborations. Feel free
             to reach out through any of the channels below or use the contact
             form.
@@ -79,20 +79,22 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="card p-8 flex-1"
+            className="card p-6 sm:p-8 flex-1"
           >
-            <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">
+              Contact Information
+            </h2>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {contactInfo.map((item, index) => (
                 <MotionDiv
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                  className="flex items-center"
+                  className="flex items-center group"
                 >
-                  <div className="bg-white/10 p-3 rounded-full mr-4">
+                  <div className="bg-white/10 p-3 rounded-full mr-4 group-hover:bg-primary/20 transition-colors">
                     {item.icon}
                   </div>
                   <div>
@@ -101,7 +103,7 @@ export default function ContactPage() {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg hover:text-primary transition-colors"
+                      className="text-sm sm:text-base hover:text-primary transition-colors"
                     >
                       {item.value}
                     </a>
@@ -111,12 +113,17 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-4">Current Status</h3>
-              <p className="bg-primary/20 border border-primary/30 rounded-lg p-4">
-                I'm currently pursuing my Computer Science degree at California
-                Baptist University and am open to internship opportunities and
-                freelance projects.
-              </p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-4">
+                Current Status
+              </h3>
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 relative overflow-hidden">
+                <p className="relative z-10">
+                  I'm currently pursuing my Computer Science degree at
+                  California Baptist University and am open to internship
+                  opportunities and freelance projects.
+                </p>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+              </div>
             </div>
           </MotionDiv>
 
@@ -125,9 +132,11 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="card p-8 flex-1"
+            className="card p-6 sm:p-8 flex-1"
           >
-            <h2 className="text-2xl font-bold mb-6">Send Me a Message</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">
+              Send Me a Message
+            </h2>
             <ContactForm />
           </MotionDiv>
         </div>

@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, AlertTriangle } from "lucide-react";
 
 interface FormState {
   name: string;
@@ -120,17 +120,35 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-lg mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-5 w-full max-w-lg mx-auto">
       {submitStatus === "success" && (
-        <div className="bg-green-500/20 border border-green-500 text-white p-4 rounded-lg">
-          Thank you for your message! I'll get back to you soon.
+        <div className="bg-green-500/20 border border-green-500/50 text-white p-4 rounded-lg flex items-start gap-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <p>Thank you for your message! I'll get back to you soon.</p>
         </div>
       )}
 
       {submitStatus === "error" && (
-        <div className="bg-red-500/20 border border-red-500 text-white p-4 rounded-lg">
-          Sorry, there was an error sending your message. Please try again
-          later.
+        <div className="bg-red-500/20 border border-red-500/50 text-white p-4 rounded-lg flex items-start gap-3">
+          <AlertTriangle
+            className="text-red-400 flex-shrink-0 mt-0.5"
+            size={18}
+          />
+          <p>
+            Sorry, there was an error sending your message. Please try again
+            later.
+          </p>
         </div>
       )}
 
@@ -151,7 +169,10 @@ export default function ContactForm() {
           disabled={isSubmitting}
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+          <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+            <AlertTriangle size={14} />
+            {errors.name}
+          </p>
         )}
       </div>
 
@@ -172,7 +193,10 @@ export default function ContactForm() {
           disabled={isSubmitting}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+          <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+            <AlertTriangle size={14} />
+            {errors.email}
+          </p>
         )}
       </div>
 
@@ -193,7 +217,10 @@ export default function ContactForm() {
           disabled={isSubmitting}
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+          <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+            <AlertTriangle size={14} />
+            {errors.message}
+          </p>
         )}
       </div>
 

@@ -1,15 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card-bg: rgba(255, 255, 255, 0.1);
-  --card-border: rgba(255, 255, 255, 0.3);
-  --text-primary: #ededed;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --primary: #0080ff;
+  --primary-light: rgba(0, 128, 255, 0.2);
+  --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.5);
 }
@@ -18,7 +20,9 @@
   --background: #0a0a0a;
   --foreground: #ededed;
   --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.2);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --primary: #0080ff;
+  --primary-light: rgba(0, 128, 255, 0.2);
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.5);
@@ -27,8 +31,10 @@
 [data-theme="light"] {
   --background: #ffffff;
   --foreground: #171717;
-  --card-bg: rgba(0, 0, 0, 0.05);
-  --card-border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --primary: #0080ff;
+  --primary-light: rgba(0, 128, 255, 0.1);
   --text-primary: #171717;
   --text-secondary: rgba(0, 0, 0, 0.7);
   --text-muted: rgba(0, 0, 0, 0.5);
@@ -37,6 +43,7 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
@@ -46,17 +53,41 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* Typography improvements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
 /* Common component styles */
 .card {
-  @apply bg-transparent backdrop-blur-sm border rounded-2xl shadow-lg;
+  @apply bg-transparent backdrop-blur-sm border rounded-xl shadow-lg;
   background: var(--card-bg);
   border-color: var(--card-border);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--card-border);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .section-heading {
-  @apply text-3xl font-bold mb-6 relative inline-block;
+  @apply text-2xl md:text-3xl font-bold mb-6 relative inline-block;
 }
 
 .section-heading::after {
@@ -68,6 +99,19 @@ body {
   height: 4px;
   background: var(--primary);
   border-radius: 2px;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-lg transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-opacity-90 hover:-translate-y-1;
+}
+
+.btn-secondary {
+  @apply bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white hover:-translate-y-1;
 }
 
 /* Animation classes */
@@ -104,5 +148,78 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive container */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+  @apply bg-white/5 border border-white/20 rounded-lg p-3 w-full;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  @apply outline-none border-primary;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .card {
+    @apply p-4;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
   }
 }

@@ -4,7 +4,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   Menu,
   X,
@@ -39,23 +38,38 @@ const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(scrollPosition > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on navigation
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       {/* Desktop and tablet navigation */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors ${
           isScrolled
-            ? `backdrop-blur-lg ${theme === "dark" ? "bg-black/50" : "bg-white/50"} shadow-lg`
+            ? `backdrop-blur-lg ${theme === "dark" ? "bg-black/50" : "bg-white/50"} shadow-md`
             : "bg-transparent"
         }`}
       >
@@ -63,7 +77,11 @@ const NavBar = () => {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/home" className="text-xl font-bold">
+              <Link
+                href="/home"
+                className="text-xl font-bold transition-colors hover:text-primary"
+                aria-label="Go to homepage"
+              >
                 <span className="text-primary">&lt;</span>
                 Ryan
                 <span className="text-primary">/&gt;</span>
@@ -72,16 +90,17 @@ const NavBar = () => {
 
             {/* Desktop navigation links */}
             <div className="hidden md:block">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-1 lg:space-x-4">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-3 py-2 text-sm rounded-md transition-colors group ${
+                    className={`relative px-3 py-2 text-sm rounded-md transition-colors ${
                       isActive(item.href)
                         ? "text-primary"
                         : "hover:text-primary"
                     }`}
+                    aria-current={isActive(item.href) ? "page" : undefined}
                   >
                     <div className="flex items-center space-x-1">
                       {item.icon}
@@ -90,12 +109,9 @@ const NavBar = () => {
                       </span>
                     </div>
 
-                    {/* Underline effect for active link */}
+                    {/* Simple underline for active link */}
                     {isActive(item.href) && (
-                      <motion.div
-                        layoutId="navbar-underline"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                      />
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
                     )}
                   </Link>
                 ))}
@@ -106,38 +122,30 @@ const NavBar = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-primary hover:bg-black/20 focus:outline-none"
-                aria-expanded="false"
+                className="inline-flex items-center justify-center p-2 rounded-md hover:text-primary hover:bg-black/20 focus:outline-none transition-colors"
+                aria-expanded={isMobileMenuOpen}
+                aria-label="Open main menu"
               >
-                <span className="sr-only">Open main menu</span>
                 <Menu className="block h-6 w-6" aria-hidden="true" />
               </button>
             </div>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
-      {/* Mobile menu, show/hide based on menu state */}
+      {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Background overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black"
+          <div
+            className="fixed inset-0 bg-black/70"
             onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
           />
 
           {/* Menu panel */}
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 w-full max-w-xs bg-background shadow-lg"
-          >
-            <div className="flex items-center justify-between px-4 py-4">
+          <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-background shadow-xl">
+            <div className="flex items-center justify-between px-6 py-6">
               <div className="text-xl font-bold">
                 <span className="text-primary">&lt;</span>
                 Menu
@@ -145,23 +153,23 @@ const NavBar = () => {
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="rounded-md text-white hover:text-primary focus:outline-none"
+                className="rounded-md text-white hover:text-primary focus:outline-none transition-colors"
+                aria-label="Close menu"
               >
-                <span className="sr-only">Close menu</span>
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="px-2 pt-2 pb-3 space-y-1 overflow-y-auto max-h-[calc(100vh-80px)]">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block px-3 py-4 rounded-md text-base font-medium ${
+                  className={`block px-4 py-5 rounded-lg text-base font-medium transition-colors ${
                     isActive(item.href)
-                      ? "bg-primary/20 text-primary"
+                      ? "bg-primary/10 text-primary border-l-4 border-primary"
                       : "hover:bg-white/5"
                   }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
                 >
                   <div className="flex items-center space-x-3">
                     {item.icon}
@@ -169,8 +177,78 @@ const NavBar = () => {
                   </div>
                 </Link>
               ))}
+
+              <div className="pt-6 px-4 mt-8 border-t border-white/10">
+                <p className="text-sm text-white/50 mb-2">Connect with me</p>
+                <div className="flex space-x-4">
+                  <a
+                    href="https://github.com/RyanStoffel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-white/10 hover:bg-primary/20 transition-colors"
+                    aria-label="GitHub Profile"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/ryan-stoffel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-white/10 hover:bg-primary/20 transition-colors"
+                    aria-label="LinkedIn Profile"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a
+                    href="mailto:ryanstoffel62@icloud.com"
+                    className="p-2 rounded-full bg-white/10 hover:bg-primary/20 transition-colors"
+                    aria-label="Email"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
     </>

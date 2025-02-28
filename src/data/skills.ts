@@ -10,34 +10,27 @@ export const skills: Skill[] = [
   // Programming Languages
   { name: "Java", category: "Languages", level: 90, color: "#ED8B00" },
   { name: "C++", category: "Languages", level: 85, color: "#00599C" },
-  { name: "Python", category: "Languages", level: 80, color: "#3776AB" },
-  { name: "JavaScript", category: "Languages", level: 85, color: "#F7DF1E" },
-  { name: "TypeScript", category: "Languages", level: 75, color: "#3178C6" },
+  { name: "Python", category: "Languages", level: 60, color: "#3776AB" },
+  { name: "JavaScript", category: "Languages", level: 50, color: "#F7DF1E" },
+  { name: "TypeScript", category: "Languages", level: 70, color: "#3178C6" },
   { name: "C#", category: "Languages", level: 70, color: "#239120" },
-  { name: "SQL", category: "Languages", level: 75, color: "#4479A1" },
+  { name: "SQL", category: "Languages", level: 80, color: "#4479A1" },
 
   // Web Technologies
   { name: "HTML", category: "Web", level: 90, color: "#E34F26" },
   { name: "CSS", category: "Web", level: 85, color: "#1572B6" },
   { name: "React", category: "Web", level: 80, color: "#61DAFB" },
-  { name: "Next.js", category: "Web", level: 75, color: "#000000" },
+  { name: "Next.js", category: "Web", level: 85, color: "#000000" },
   { name: "Tailwind CSS", category: "Web", level: 85, color: "#06B6D4" },
   { name: "Node.js", category: "Web", level: 70, color: "#339933" },
-  { name: "REST APIs", category: "Web", level: 75, color: "#FF6C37" },
 
   // Game Development
-  { name: "Unity", category: "Game Development", level: 80, color: "#000000" },
+  { name: "Unity", category: "Game Development", level: 90, color: "#000000" },
   {
     name: "2D Game Design",
     category: "Game Development",
     level: 75,
     color: "#9146FF",
-  },
-  {
-    name: "3D Modeling Basics",
-    category: "Game Development",
-    level: 60,
-    color: "#0FAAFF",
   },
   {
     name: "Game Physics",
@@ -47,16 +40,14 @@ export const skills: Skill[] = [
   },
 
   // Tools & Technologies
-  { name: "Git", category: "Tools", level: 85, color: "#F05032" },
-  { name: "GitHub", category: "Tools", level: 80, color: "#181717" },
-  { name: "VS Code", category: "Tools", level: 90, color: "#007ACC" },
-  { name: "Visual Studio", category: "Tools", level: 85, color: "#5C2D91" },
+  { name: "Git", category: "Tools", level: 90, color: "#F05032" },
+  { name: "GitHub", category: "Tools", level: 100, color: "#181717" },
+  { name: "Neovim", category: "Tools", level: 80, color: "#007ACC" },
+  { name: "Vs Code", category: "Tools", level: 85, color: "#5C2D91" },
   { name: "Docker Basics", category: "Tools", level: 60, color: "#2496ED" },
 
   // Databases
-  { name: "MySQL", category: "Databases", level: 75, color: "#4479A1" },
-  { name: "MongoDB", category: "Databases", level: 65, color: "#47A248" },
-  { name: "SQLite", category: "Databases", level: 70, color: "#003B57" },
+  { name: "MySQL", category: "Databases", level: 85, color: "#4479A1" },
 
   // Soft Skills
   { name: "Problem Solving", category: "Soft Skills", level: 90 },

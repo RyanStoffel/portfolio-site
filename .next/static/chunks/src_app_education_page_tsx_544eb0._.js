@@ -6,7 +6,7 @@
   "path": "static/chunks/src_app_education_page_tsx_544eb0._.js",
   "chunks": [
     "static/chunks/src_805d18._.js",
-    "static/chunks/node_modules_703dba._.js"
+    "static/chunks/node_modules_34f19e._.js"
   ],
   "source": "dynamic"
 });

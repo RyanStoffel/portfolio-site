@@ -58,7 +58,7 @@ export default function Education() {
       gpa: "3.1",
       icon: <GraduationCap className="text-primary" size={24} />,
       description:
-        "Pursuing a comprehensive computer science curriculum with focus on software engineering, algorithms, and data structures. Actively involved in programming competitions and tech clubs.",
+        "Pursuing a comprehensive computer science curriculum with focus on software engineering, algorithms, and data structures.",
     },
     {
       institution: "Centennial High School",
@@ -68,7 +68,7 @@ export default function Education() {
       gpa: "3.8",
       icon: <BookOpen className="text-primary" size={24} />,
       description:
-        "Completed advanced placement courses in Computer Science, Mathematics, and Physics. Participated in robotics club and coding competitions.",
+        "Completed one AP Class, Computer Science Principles. Participated in Marching Band for all 4 years.",
     },
   ];
 
@@ -103,34 +103,6 @@ export default function Education() {
       skills: ["Linux", "Network Protocols", "System Administration"],
       description:
         "Explored operating system concepts and network protocols. Gained hands-on experience with Linux systems, network configuration, and security principles.",
-    },
-    {
-      title: "Web Development",
-      skills: ["HTML/CSS", "JavaScript", "React"],
-      description:
-        "Designed and developed responsive web applications using modern frameworks. Implemented front-end interfaces with React and connected to back-end services.",
-    },
-  ];
-
-  // Certifications data
-  const certifications = [
-    {
-      title: "Python Data Structures & Algorithms",
-      issuer: "Coursera",
-      date: "2023",
-      link: "#",
-    },
-    {
-      title: "Web Development Fundamentals",
-      issuer: "freeCodeCamp",
-      date: "2022",
-      link: "#",
-    },
-    {
-      title: "Introduction to Game Development",
-      issuer: "Unity Learn",
-      date: "2023",
-      link: "#",
     },
   ];
 
@@ -208,38 +180,6 @@ export default function Education() {
                           <p className="mt-3 text-sm">{edu.description}</p>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Certifications */}
-                <h3 className="text-xl font-bold mt-8 mb-4 flex items-center">
-                  <Award className="mr-2 text-primary" size={20} />
-                  Certifications
-                </h3>
-
-                <div className="space-y-3">
-                  {certifications.map((cert, index) => (
-                    <motion.div
-                      key={index}
-                      variants={itemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="flex justify-between items-center p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
-                    >
-                      <div>
-                        <h4 className="font-medium">{cert.title}</h4>
-                        <p className="text-sm text-white/60">
-                          {cert.issuer} · {cert.date}
-                        </p>
-                      </div>
-                      <Link
-                        href={cert.link}
-                        className="text-primary hover:underline text-sm"
-                      >
-                        View
-                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -362,55 +302,6 @@ export default function Education() {
                           ></path>
                         </svg>
                       </Link>
-                    </motion.div>
-                  </motion.div>
-                </div>
-
-                {/* Extracurricular Activities */}
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4">
-                    Extracurricular Activities
-                  </h3>
-
-                  <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="space-y-4"
-                  >
-                    <motion.div
-                      variants={itemVariants}
-                      className="bg-white/5 p-4 rounded-lg"
-                    >
-                      <h4 className="font-semibold">CBU Coding Club</h4>
-                      <p className="text-sm text-white/70">
-                        Active member participating in coding challenges and
-                        hackathons.
-                      </p>
-                    </motion.div>
-
-                    <motion.div
-                      variants={itemVariants}
-                      className="bg-white/5 p-4 rounded-lg"
-                    >
-                      <h4 className="font-semibold">
-                        Game Development Workshop
-                      </h4>
-                      <p className="text-sm text-white/70">
-                        Organized and led workshops to teach fellow students
-                        game development basics.
-                      </p>
-                    </motion.div>
-
-                    <motion.div
-                      variants={itemVariants}
-                      className="bg-white/5 p-4 rounded-lg"
-                    >
-                      <h4 className="font-semibold">Tech Volunteering</h4>
-                      <p className="text-sm text-white/70">
-                        Volunteer at local community center teaching basic
-                        computer skills to seniors.
-                      </p>
                     </motion.div>
                   </motion.div>
                 </div>
