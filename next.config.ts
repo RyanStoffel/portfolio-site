@@ -3,9 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  typescript: {
+  eslint: {
     // Disable type checking during build to avoid blocking deployment
-    ignoreBuildErrors: true,
+    ignoreDuringBuilds: true,
   },
   // Add any other necessary configurations
 };
