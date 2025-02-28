@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"app/contact/page.tsx -> framer-motion":{"id":39886,"files":["static/chunks/886.878002462336c41f.js"]},"app/projects/[id]/page.tsx -> framer-motion":{"id":39886,"files":["static/chunks/886.878002462336c41f.js"]},"app/projects/page.tsx -> framer-motion":{"id":39886,"files":["static/chunks/886.878002462336c41f.js"]}}';
