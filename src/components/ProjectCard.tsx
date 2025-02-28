@@ -15,6 +15,7 @@ export interface ProjectType {
   liveDemo?: string;
   technologies: string[];
   featured?: boolean;
+  longDescription?: string;
 }
 
 interface ProjectCardProps {

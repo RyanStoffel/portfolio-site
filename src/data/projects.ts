@@ -1,4 +1,3 @@
-// src/data/projects.ts
 import { ProjectType } from "@/components/ProjectCard";
 
 export const projects: ProjectType[] = [
@@ -11,7 +10,7 @@ export const projects: ProjectType[] = [
     github:
       "https://github.com/egr222-software-engineering-fall-2024/hw3-RyanStoffel",
     technologies: ["Java", "Data Analysis", "UI Design"],
-    description: `
+    longDescription: `
       This application analyzes baby name popularity trends across different decades. Users can search for specific names and see how their popularity has changed over time. The program processes large datasets of baby names from the US census to provide accurate rankings.
       
       Key features include:
