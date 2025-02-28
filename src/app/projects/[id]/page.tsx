@@ -99,7 +99,7 @@ export default function ProjectDetailPage() {
               <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
 
               <div className="prose prose-invert max-w-none">
-                {project.longDescription.split("\n\n").map((paragraph, idx) => (
+                {project.description.split("\n\n").map((paragraph, idx) => (
                   <p key={idx} className="mb-4">
                     {paragraph.trim()}
                   </p>
