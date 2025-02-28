@@ -1,10 +1,13 @@
+// src/app/projects/page.tsx
 "use client";
 
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import NavBar from "@/components/NavBar";
 import ParticlesBackground from "@/components/ParticlesBackground";
-import Image from "next/image";
-import Link from "next/link";
+import ProjectCard from "@/components/ProjectCard";
+import { projects } from "@/data/projects";
+import LoadingSpinner from "@/components/Loading";
 
 // Load Framer Motion dynamically
 const MotionDiv = dynamic(
@@ -12,72 +15,93 @@ const MotionDiv = dynamic(
   { ssr: false },
 );
 
-const projects = [
-  {
-    title: "Baby Names",
-    description:
-      "A program that ranks the popularity of a certain name by decade. Made with Java.",
-    imageUrl: "/project1.png", // Replace with actual image URL
-    github:
-      "https://github.com/egr222-software-engineering-fall-2024/hw3-RyanStoffel",
-  },
-  {
-    title: "Snake",
-    description:
-      "The classic Snake Game, keeps track of score, random apple position. Made with Java, and SwingUI.",
-    imageUrl: "/project2.png",
-    github: "https://github.com/RyanStoffel/SnakeGameJava",
-  },
-  {
-    title: "Singly Linked List Demo",
-    description:
-      "A program that demonstrates all the operations available with a Singly Linked List. Made with C++.",
-    imageUrl: "/project3.png",
-    github: "https://github.com/RyanStoffel/EGR227-Lab3",
-  },
-];
+// Get unique technologies across all projects
+const allTechnologies = Array.from(
+  new Set(projects.flatMap((project) => project.technologies)),
+).sort();
 
 export default function ProjectsPage() {
+  const [mounted, setMounted] = useState(false);
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [filteredProjects, setFilteredProjects] = useState(projects);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedTech) {
+      setFilteredProjects(
+        projects.filter((project) =>
+          project.technologies.includes(selectedTech),
+        ),
+      );
+    } else {
+      setFilteredProjects(projects);
+    }
+  }, [selectedTech]);
+
+  if (!mounted) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="min-h-screen bg-transparent text-white">
       <NavBar />
       <ParticlesBackground />
-      <div className="container mx-auto px-4 py-10">
-        <h1 className="text-4xl font-bold text-center mb-8 mt-16 underline">
-          Projects
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
-          {projects.map((project, index) => (
-            <MotionDiv
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.6 }}
-              className="bg-transparent backdrop-blur-sm border border-white p-6 rounded-2xl shadow-lg flex flex-col h-[600px]"
+      <div className="container mx-auto px-4 py-24">
+        <MotionDiv
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl font-bold mb-6">My Projects</h1>
+          <p className="text-lg max-w-2xl mx-auto mb-8">
+            Here are some of the projects I've worked on. You can filter them by
+            technology or click on any project to see more details.
+          </p>
+
+          {/* Technology filter */}
+          <div className="flex flex-wrap justify-center gap-2 mt-6 mb-8">
+            <button
+              onClick={() => setSelectedTech(null)}
+              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                selectedTech === null
+                  ? "bg-primary text-white"
+                  : "bg-white/10 hover:bg-white/20"
+              }`}
             >
-              <div className="relative w-full h-64 mb-4">
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  layout="fill"
-                  objectFit="contain"
-                  className="rounded-lg"
-                />
-              </div>
-              <h2 className="text-2xl font-semibold mb-2">{project.title}</h2>
-              <p className="text-gray-400 mb-4 flex-grow">
-                {project.description}
-              </p>
-              <div className="flex justify-center mt-auto">
-                <Link href={project.github} legacyBehavior>
-                  <a className="bg-primary px-4 py-2 rounded-md text-white hover:-translate-y-1 transition-all duration-300 ease-in-out">
-                    GitHub
-                  </a>
-                </Link>
-              </div>
-            </MotionDiv>
-          ))}
-        </div>
+              All
+            </button>
+
+            {allTechnologies.map((tech) => (
+              <button
+                key={tech}
+                onClick={() => setSelectedTech(tech)}
+                className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                  selectedTech === tech
+                    ? "bg-primary text-white"
+                    : "bg-white/10 hover:bg-white/20"
+                }`}
+              >
+                {tech}
+              </button>
+            ))}
+          </div>
+        </MotionDiv>
+
+        {filteredProjects.length === 0 ? (
+          <div className="text-center py-12">
+            <p>No projects found with the selected technology.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
