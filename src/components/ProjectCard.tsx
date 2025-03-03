@@ -4,7 +4,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Github, ExternalLink, Info } from "lucide-react";
+import { Github, Info } from "lucide-react";
 
 export interface ProjectType {
   id: string;
@@ -29,7 +29,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      whileHover={{ y: -10 }}
       className={`card flex flex-col h-full relative overflow-hidden group ${
         project.featured ? "border-primary/50" : ""
       }`}
@@ -42,12 +41,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       )}
 
       {/* Project Image with overlay */}
-      <div className="relative w-full h-48 overflow-hidden">
+      <div className="relative w-full h-56 overflow-hidden">
         <Image
           src={project.imageUrl}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -55,16 +54,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
 
-        <p className="text-white/70 mb-4 flex-grow line-clamp-3">
+        <p className="text-white/70 mb-4 flex-grow line-clamp-3 text-sm">
           {project.description}
         </p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech, i) => (
+          {project.technologies.slice(0, 3).map((tech, i) => (
             <span
               key={i}
               className="text-xs px-2 py-1 bg-white/10 rounded-full border border-white/20 hover:bg-primary/20 hover:border-primary/50 transition-colors"
@@ -72,11 +71,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               {tech}
             </span>
           ))}
+          {project.technologies.length > 3 && (
+            <span className="text-xs px-2 py-1 bg-white/5 rounded-full text-white/50">
+              +{project.technologies.length - 3}
+            </span>
+          )}
         </div>
       </div>
 
       {/* Action buttons */}
-      <div className="grid grid-cols-3 gap-2 p-4 pt-0 mt-auto">
+      <div className="grid grid-cols-2 gap-2 p-4 pt-0 mt-auto">
         <Link
           href={project.github}
           className="flex items-center justify-center gap-1 bg-black/30 hover:bg-primary text-white px-3 py-2 rounded-md transition-colors"
@@ -85,26 +89,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           aria-label={`View ${project.title} GitHub repository`}
         >
           <Github size={16} />
-          <span className="text-sm">Code</span>
+          <span className="text-sm">View Code</span>
         </Link>
-
-        {project.liveDemo ? (
-          <Link
-            href={project.liveDemo}
-            className="flex items-center justify-center gap-1 bg-black/30 hover:bg-white text-white hover:text-black px-3 py-2 rounded-md transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${project.title} live demo`}
-          >
-            <ExternalLink size={16} />
-            <span className="text-sm">Demo</span>
-          </Link>
-        ) : (
-          <div className="flex items-center justify-center gap-1 bg-black/30 text-white/50 px-3 py-2 rounded-md cursor-not-allowed">
-            <ExternalLink size={16} />
-            <span className="text-sm">Demo</span>
-          </div>
-        )}
 
         <Link
           href={`/projects/${project.id}`}

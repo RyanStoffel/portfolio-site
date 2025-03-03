@@ -7,8 +7,8 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
   --primary: #0080ff;
   --primary-light: rgba(0, 128, 255, 0.2);
   --text-primary: #ffffff;
@@ -19,8 +19,8 @@
 [data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
   --primary: #0080ff;
   --primary-light: rgba(0, 128, 255, 0.2);
   --text-primary: #ffffff;
@@ -31,8 +31,8 @@
 [data-theme="light"] {
   --background: #ffffff;
   --foreground: #171717;
-  --card-bg: rgba(0, 0, 0, 0.03);
-  --card-border: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(0, 0, 0, 0.02);
+  --card-border: rgba(0, 0, 0, 0.06);
   --primary: #0080ff;
   --primary-light: rgba(0, 128, 255, 0.1);
   --text-primary: #171717;
@@ -70,72 +70,34 @@ h6 {
 
 /* Common component styles */
 .card {
-  @apply bg-transparent backdrop-blur-sm border rounded-xl shadow-lg;
+  @apply backdrop-blur-sm border rounded-lg;
   background: var(--card-bg);
   border-color: var(--card-border);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 .card:hover {
   border-color: var(--card-border);
-  box-shadow:
-    0 10px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.section-heading {
-  @apply text-2xl md:text-3xl font-bold mb-6 relative inline-block;
-}
-
-.section-heading::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60%;
-  height: 4px;
-  background: var(--primary);
-  border-radius: 2px;
 }
 
 /* Button styles */
 .btn {
-  @apply px-4 py-2 rounded-lg transition-all duration-300;
+  @apply px-4 py-2 rounded-md transition-all duration-200;
 }
 
 .btn-primary {
-  @apply bg-primary text-white hover:bg-opacity-90 hover:-translate-y-1;
+  @apply bg-primary text-white hover:bg-opacity-90;
 }
 
 .btn-secondary {
-  @apply bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white hover:-translate-y-1;
-}
-
-/* Animation classes */
-.fade-in {
-  @apply opacity-0;
-  animation: fadeIn 0.6s ease forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  @apply bg-white/10 backdrop-blur-sm hover:bg-white/15 border border-white/10 text-white;
 }
 
 /* Loading indicator styles */
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--text-secondary);
   border-bottom-color: var(--primary);
   border-radius: 50%;
   display: inline-block;
@@ -177,8 +139,6 @@ h6 {
 @media (min-width: 1024px) {
   .container {
     max-width: 1024px;
-    padding-right: 2rem;
-    padding-left: 2rem;
   }
 }
 
@@ -192,17 +152,14 @@ h6 {
 input,
 textarea,
 select {
-  @apply bg-white/5 border border-white/20 rounded-lg p-3 w-full;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  @apply bg-white/5 border border-white/10 rounded-md p-3 w-full;
+  transition: border-color 0.2s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   @apply outline-none border-primary;
-  box-shadow: 0 0 0 2px var(--primary-light);
 }
 
 /* Mobile optimizations */

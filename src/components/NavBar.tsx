@@ -4,16 +4,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Menu,
-  X,
-  Home,
-  User,
-  BookOpen,
-  Code,
-  FolderGit2,
-  Mail,
-} from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 const NavBar = () => {
@@ -26,12 +17,11 @@ const NavBar = () => {
   const isActive = (path: string) => pathname === path;
 
   const navItems = [
-    { label: "Home", href: "/home", icon: <Home size={18} /> },
-    { label: "About", href: "/about", icon: <User size={18} /> },
-    { label: "Education", href: "/education", icon: <BookOpen size={18} /> },
-    { label: "Skills", href: "/skills", icon: <Code size={18} /> },
-    { label: "Projects", href: "/projects", icon: <FolderGit2 size={18} /> },
-    { label: "Contact", href: "/contact", icon: <Mail size={18} /> },
+    { label: "Home", href: "/home" },
+    { label: "About", href: "/about" },
+    { label: "Projects", href: "/projects" },
+    { label: "Skills", href: "/skills" },
+    { label: "Contact", href: "/contact" },
   ];
 
   // Handle scroll event to change navbar appearance
@@ -73,7 +63,7 @@ const NavBar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <div className="flex items-center">
@@ -90,24 +80,19 @@ const NavBar = () => {
 
             {/* Desktop navigation links */}
             <div className="hidden md:block">
-              <div className="flex items-center space-x-1 lg:space-x-4">
+              <div className="flex items-center space-x-6">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={`relative px-3 py-2 text-sm rounded-md transition-colors ${
                       isActive(item.href)
-                        ? "text-primary"
+                        ? "text-primary font-medium"
                         : "hover:text-primary"
                     }`}
                     aria-current={isActive(item.href) ? "page" : undefined}
                   >
-                    <div className="flex items-center space-x-1">
-                      {item.icon}
-                      <span className="font-mono">
-                        {isActive(item.href) ? `<${item.label}/>` : item.label}
-                      </span>
-                    </div>
+                    {item.label}
 
                     {/* Simple underline for active link */}
                     {isActive(item.href) && (
@@ -164,23 +149,19 @@ const NavBar = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block px-4 py-5 rounded-lg text-base font-medium transition-colors ${
+                  className={`block px-4 py-4 rounded-lg text-base transition-colors ${
                     isActive(item.href)
                       ? "bg-primary/10 text-primary border-l-4 border-primary"
                       : "hover:bg-white/5"
                   }`}
                   aria-current={isActive(item.href) ? "page" : undefined}
                 >
-                  <div className="flex items-center space-x-3">
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </div>
+                  {item.label}
                 </Link>
               ))}
 
-              <div className="pt-6 px-4 mt-8 border-t border-white/10">
-                <p className="text-sm text-white/50 mb-2">Connect with me</p>
-                <div className="flex space-x-4">
+              <div className="pt-6 mt-8 border-t border-white/10 px-4">
+                <div className="flex justify-center space-x-4 mt-4">
                   <a
                     href="https://github.com/RyanStoffel"
                     target="_blank"
