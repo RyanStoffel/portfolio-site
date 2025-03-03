@@ -9,7 +9,7 @@ import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import NavBar from "@/components/NavBar";
 import ParticlesBackground from "@/components/ParticlesBackground";
 import LoadingSpinner from "@/components/Loading";
-import { getProjectById } from "@/data/projects";
+import { projects } from "@/data/projects";
 import { ProjectType } from "@/components/ProjectCard";
 import dynamic from "next/dynamic";
 

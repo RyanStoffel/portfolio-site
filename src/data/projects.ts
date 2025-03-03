@@ -2,6 +2,49 @@ import { ProjectType } from "@/components/ProjectCard";
 
 export const projects: ProjectType[] = [
   {
+    id: "mail-warden",
+    title: "Mail-Warden",
+    description:
+      "A comprehensive email security tool with phishing detection, attachment scanning, and encrypted communications.",
+    imageUrl: "/mailwarden.png",
+    github: "https://github.com/RyanStoffel/mail-warden",
+    technologies: ["Python", "Cryptography", "Security", "UI Design"],
+    featured: true,
+    longDescription: `
+      Mail-Warden is a comprehensive email security tool that I developed for my OS & Networking class at California Baptist University. This application helps users protect themselves against common email threats through three main security components:
+      
+      Key features include:
+      - Phishing Detection: Analyzes email content for suspicious keywords, detects lookalike domains, identifies sender spoofing attempts, and alerts when sensitive information is requested
+      - Attachment Scanner: Scans email attachments for potential threats, detects dangerous file types and extensions, identifies file type/extension mismatches, and checks for known malware signatures
+      - Encryption Manager: Provides public key cryptography for secure communications, allows password-protected emails for recipients without keys, and securely manages contact keys
+      
+      This project showcases my understanding of cybersecurity principles, cryptography implementation, and creating user-friendly security tools. I built the application using Python with a PyQt5 interface and implemented several security libraries for the different components.
+      
+      The application was thoroughly tested with unit tests for each security component, ensuring reliable protection for users' email communications.
+    `,
+  },
+  {
+    id: "tic-tac-toe",
+    title: "Tic Tac Toe",
+    description:
+      "A console-based implementation of the classic Tic Tac Toe game written in Java.",
+    imageUrl: "/tictactoe.png",
+    github: "https://github.com/RyanStoffel/TicTacToe",
+    technologies: ["Java", "Console Application", "Game Development"],
+    longDescription: `
+      This is a console-based implementation of the classic Tic Tac Toe game written in Java. The project was a small weekend project inspired by @ForrestKnight on YouTube, where I decided to recreate his idea with my own implementation.
+      
+      Key features include:
+      - Console-based user interface with a visual representation of the game board
+      - Input validation to prevent placing marks in already occupied cells
+      - Win detection for rows, columns, and diagonals
+      - Option to play multiple games without restarting the application
+      - Clean, readable code in just about 100 lines
+      
+      Although simple, this project demonstrates fundamental programming concepts such as 2D arrays, input validation, game state management, and user interaction through a console interface.
+    `,
+  },
+  {
     id: "baby-names",
     title: "Baby Names",
     description:
@@ -67,11 +110,3 @@ export const projects: ProjectType[] = [
     `,
   },
 ];
-
-export function getProjectById(id: string): ProjectType | undefined {
-  return projects.find((project) => project.id === id);
-}
-
-export function getAllProjectIds(): string[] {
-  return projects.map((project) => project.id);
-}
