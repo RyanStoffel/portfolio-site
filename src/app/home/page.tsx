@@ -78,7 +78,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-primary font-mono text-lg mb-2"
             >
-              Hello, I'm
+              Hello, I&aposm
             </motion.p>
 
             <motion.h1
@@ -99,7 +99,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-white/70 text-base md:text-lg mb-8 leading-relaxed"
             >
-              I'm a passionate student at California Baptist University
+              I%apos;m a passionate student at California Baptist University
               specializing in game development and web technologies. My goal is
               to create interactive experiences that engage and inspire.
             </motion.p>
@@ -297,11 +297,11 @@ export default function Home() {
           className="max-w-4xl mx-auto text-center relative z-10 px-4"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-base sm:text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-            I'm currently looking for internship opportunities and exciting
-            projects to collaborate on. If you're interested in working
+            I&apos;m currently looking for internship opportunities and exciting
+            projects to collaborate on. If you&apos;re interested in working
             together, feel free to get in touch!
           </p>
           <Link
